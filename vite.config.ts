@@ -15,7 +15,7 @@ export default defineConfig(() => {
         registerType: 'autoUpdate',
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'icon.svg'],
         manifest: {
-          id: '/',
+          id: '/framemaker/',
           name: 'Photo Frame Batch Processor Pro',
           short_name: 'PhotoFramer',
           description: 'Batch photo framing, gallery matting, and edge sharpening tool.',
@@ -23,8 +23,8 @@ export default defineConfig(() => {
           background_color: '#121214',
           display: 'standalone',
           orientation: 'any',
-          start_url: '/',
-          scope: '/',
+          start_url: '/framemaker/',
+          scope: '/framemaker/',
           categories: ['photography', 'productivity', 'utilities'],
           icons: [
             {
