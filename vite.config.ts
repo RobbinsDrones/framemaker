@@ -15,16 +15,16 @@ export default defineConfig(() => {
         registerType: 'autoUpdate',
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'icon.svg'],
         manifest: {
-          id: '/framer/',
+          id: '/framemaker/',
           name: 'Photo Frame Batch Processor Pro',
-          short_name: 'framer',
+          short_name: 'framemaker',
           description: 'Batch photo framing, gallery matting, and edge sharpening tool.',
           theme_color: '#121214',
           background_color: '#121214',
           display: 'standalone',
           orientation: 'any',
-          start_url: '/framer/',
-          scope: '/framer/',
+          start_url: '/framemaker/',
+          scope: '/framemaker/',
           categories: ['photography', 'productivity', 'utilities'],
           icons: [
             {
