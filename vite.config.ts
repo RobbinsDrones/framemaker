@@ -6,7 +6,7 @@ import {VitePWA} from 'vite-plugin-pwa';
 
 export default defineConfig(() => {
   return {
-    base: '/framemaker/',
+    base: '/framemaker/', // <-- Match exact GitHub repository name (case-sensitive)
     
     plugins: [
       react(),
@@ -15,7 +15,7 @@ export default defineConfig(() => {
         registerType: 'autoUpdate',
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'icon.svg'],
         manifest: {
-          id: '/framemaker/',
+          id: '/PhotoFramer/',
           name: 'Photo Frame Batch Processor Pro',
           short_name: 'PhotoFramer',
           description: 'Batch photo framing, gallery matting, and edge sharpening tool.',
@@ -23,24 +23,24 @@ export default defineConfig(() => {
           background_color: '#121214',
           display: 'standalone',
           orientation: 'any',
-          start_url: '/framemaker/',
-          scope: '/framemaker/',
+          start_url: '/PhotoFramer/',
+          scope: '/PhotoFramer/',
           categories: ['photography', 'productivity', 'utilities'],
           icons: [
             {
-              src: '/pwa-192x192.png',
+              src: 'pwa-192x192.png', // Relative path so VitePWA resolves it relative to base
               sizes: '192x192',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/pwa-512x512.png',
+              src: 'pwa-512x512.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/pwa-maskable-512x512.png',
+              src: 'pwa-maskable-512x512.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'maskable',
@@ -62,10 +62,7 @@ export default defineConfig(() => {
       },
     },
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
   };
