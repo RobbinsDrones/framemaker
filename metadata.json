@@ -2,5 +2,7 @@
   "name": "Photo Frame Batch Processor Pro",
   "description": "Professional batch photo framing, gallery matting, and edge sharpening tool. Install on Android as a PWA or export as an APK.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

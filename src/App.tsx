@@ -5,7 +5,6 @@ import {
   Camera,
   FolderOpen,
   Image as ImageIcon,
-  Smartphone,
   Download,
   Share2,
   Trash2,
@@ -35,9 +34,6 @@ import {
   loadImage,
   isLightColor
 } from './utils/frameProcessor';
-import { SAMPLE_PHOTOS } from './utils/sampleImages';
-import { PWAInstallButton } from './components/PWAInstallButton';
-import { ApkGuideModal } from './components/ApkGuideModal';
 import { OfflineIndicator } from './components/OfflineIndicator';
 
 interface SelectedFileItem {
@@ -60,7 +56,6 @@ export default function App() {
   // Application State
   const [files, setFiles] = useState<SelectedFileItem[]>([]);
   const [activeFileId, setActiveFileId] = useState<string | null>(null);
-  const [showApkModal, setShowApkModal] = useState<boolean>(false);
   const [isProcessingBatch, setIsProcessingBatch] = useState<boolean>(false);
   const [batchProgress, setBatchProgress] = useState<number>(0);
   const [statusText, setStatusText] = useState<string>('Ready');
@@ -95,24 +90,6 @@ export default function App() {
 
   // Active file helper
   const activeFile = files.find((f) => f.id === activeFileId) || files[0] || null;
-
-  // On mount, load sample photos if queue is empty so user can test right away
-  useEffect(() => {
-    loadSamplePhotos();
-  }, []);
-
-  const loadSamplePhotos = async () => {
-    const loaded: SelectedFileItem[] = SAMPLE_PHOTOS.map((s, idx) => ({
-      id: `sample-${idx}`,
-      name: s.name,
-      url: s.url,
-      size: 1024 * 450,
-      status: 'idle',
-    }));
-    setFiles(loaded);
-    setActiveFileId(loaded[0].id);
-    setStatusText(`Loaded 3 demo gallery photos`);
-  };
 
   // Update Margin Preset when Style Changes (Matching PowerShell styleDefaults: 1=10, 2=10, 3=6, 4=8, 5=6, 6=5)
   const handleStyleChange = (styleId: number) => {
@@ -382,9 +359,6 @@ export default function App() {
       {/* Offline Toast */}
       <OfflineIndicator />
 
-      {/* APK & Android Options Modal */}
-      <ApkGuideModal isOpen={showApkModal} onClose={() => setShowApkModal(false)} />
-
       {/* Top Header */}
       <header className="border-b border-zinc-800 bg-[#161619] sticky top-0 z-40 px-4 py-3 sm:px-6">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
@@ -412,22 +386,6 @@ export default function App() {
                 </span>
               </div>
             </div>
-          </div>
-
-          {/* Header Action Buttons & PWA / APK Integration */}
-          <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* Direct PWA Install Prompt */}
-            <PWAInstallButton onOpenApkModal={() => setShowApkModal(true)} />
-
-            {/* APK Guide Button */}
-            <button
-              onClick={() => setShowApkModal(true)}
-              className="flex items-center gap-1.5 rounded-lg border border-zinc-700 bg-zinc-800/90 hover:bg-zinc-700 text-zinc-200 px-3 py-1.5 text-xs font-medium transition cursor-pointer shadow-sm"
-              title="Learn how to install on Android as PWA or build an .apk"
-            >
-              <Smartphone className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="hidden sm:inline">Use on</span> Android / APK
-            </button>
           </div>
 
         </div>
@@ -536,14 +494,6 @@ export default function App() {
                   >
                     <Camera className="w-3.5 h-3.5 text-emerald-400" />
                     Snap Photo
-                  </button>
-
-                  <button
-                    onClick={loadSamplePhotos}
-                    className="px-3.5 py-1.5 rounded-lg bg-zinc-800/60 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 text-xs font-medium flex items-center gap-1.5 border border-zinc-800 cursor-pointer transition"
-                  >
-                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                    Load Demo Photos
                   </button>
                 </div>
               </div>
@@ -1008,15 +958,15 @@ export default function App() {
               <span>Download ZIP</span>
             </button>
 
-            {/* Android Web Share Button */}
+            {/* Web Share Button */}
             <button
               onClick={shareCurrentPhoto}
               disabled={!activeFile}
               className="h-11 px-4 rounded-lg font-semibold text-xs bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 flex items-center gap-2 transition cursor-pointer"
-              title="Share photo directly to WhatsApp, Instagram, or Gallery on Android"
+              title="Share photo directly to other apps"
             >
               <Share2 className="w-4 h-4 text-emerald-400" />
-              <span>Share (Android)</span>
+              <span>Share Photo</span>
             </button>
 
             {/* Clear All */}
@@ -1049,29 +999,6 @@ export default function App() {
             </div>
           </div>
 
-        </div>
-
-        {/* Android & APK Quick Guide Notice */}
-        <div className="bg-zinc-900/60 border border-zinc-800/80 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-zinc-400">
-          <div className="flex items-center gap-2.5">
-            <div className="p-1.5 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 shrink-0">
-              <Smartphone className="w-4 h-4" />
-            </div>
-            <div>
-              <span className="font-semibold text-zinc-200 block">
-                Can this run as an .APK on your Android phone?
-              </span>
-              <span>
-                Yes! You can install it directly from Chrome as a PWA, or compile it to a signed .apk in 60s via PWABuilder / Bubblewrap.
-              </span>
-            </div>
-          </div>
-          <button
-            onClick={() => setShowApkModal(true)}
-            className="self-start sm:self-auto px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs shrink-0 transition"
-          >
-            View APK Instructions &rarr;
-          </button>
         </div>
 
       </main>
