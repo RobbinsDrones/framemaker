@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f3efe6"/>
+    </linearGradient>
+    <linearGradient id="art" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- App Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+
+  <!-- Outer Picture Frame with Shadow -->
+  <rect x="76" y="76" width="360" height="360" rx="16" fill="url(#frame)" filter="url(#shadow)" stroke="#38bdf8" stroke-width="4"/>
+
+  <!-- Inner Mat Bevel / Shadow -->
+  <rect x="116" y="116" width="280" height="280" rx="6" fill="#18181b" stroke="#71717a" stroke-width="2"/>
+
+  <!-- Photo Artwork inside Frame -->
+  <rect x="136" y="136" width="240" height="240" rx="4" fill="url(#art)"/>
+
+  <!-- Mountain / Sun Landscape Accent in Artwork -->
+  <circle cx="210" cy="200" r="28" fill="#fbbf24" opacity="0.9"/>
+  <path d="M140 340 L220 230 L270 300 L320 220 L376 340 Z" fill="#ffffff" opacity="0.25"/>
+  <path d="M180 340 L250 250 L310 320 L340 280 L376 340 Z" fill="#0f172a" opacity="0.45"/>
+
+  <!-- Crop Corner Marks -->
+  <path d="M60 90 L60 60 L90 60" fill="none" stroke="#60a5fa" stroke-width="6" stroke-linecap="round"/>
+  <path d="M422 60 L452 60 L452 90" fill="none" stroke="#60a5fa" stroke-width="6" stroke-linecap="round"/>
+  <path d="M60 422 L60 452 L90 452" fill="none" stroke="#60a5fa" stroke-width="6" stroke-linecap="round"/>
+  <path d="M422 452 L452 452 L452 422" fill="none" stroke="#60a5fa" stroke-width="6" stroke-linecap="round"/>
+</svg>
