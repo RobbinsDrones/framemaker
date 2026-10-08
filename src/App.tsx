@@ -202,7 +202,7 @@ export default function App() {
     setStatusText('Ready');
   };
 
-  // Batch Processing Engine
+// Batch Processing Engine
   const runBatchProcessing = async () => {
     if (files.length === 0) return;
 
@@ -249,9 +249,24 @@ export default function App() {
     setIsProcessingBatch(false);
     if (!cancelBatchRef.current) {
       setStatusText(`Complete! ${completedCount} photo(s) framed and ready.`);
+
+      // Automatically trigger save/download upon completion
+      if (completedCount > 0) {
+        if (updatedFiles.length === 1 && updatedFiles[0].processedBlob) {
+          // Single photo auto-download
+          const link = document.createElement('a');
+          link.download = `framed-${updatedFiles[0].name}`;
+          link.href = updatedFiles[0].processedUrl || URL.createObjectURL(updatedFiles[0].processedBlob);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        } else if (updatedFiles.length > 1) {
+          // Multi-photo batch auto-download as ZIP
+          handleDownloadZip(); 
+        }
+      }
     }
   };
-
   // Single File Download
   const downloadSinglePhoto = async (item: SelectedFileItem) => {
     try {
