@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) navigator.serviceWorker.register('/framemaker/dev-sw.js?dev-sw', { scope: '/framemaker/', type: 'classic' })
