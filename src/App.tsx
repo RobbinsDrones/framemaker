@@ -346,14 +346,14 @@ export default function App() {
       if (navigator.canShare && navigator.canShare({ files: [shareFile] })) {
         await navigator.share({
           title: 'Framed Photo',
-          text: settings.caption || '...',
+          text: settings.caption || ' ',
           files: [shareFile],
         });
         setStatusText('Shared successfully via Android!');
       } else if (navigator.share) {
         await navigator.share({
           title: 'Framed Photo',
-          text: '...',
+          text: ' ',
           url: window.location.href,
         });
       } else {
